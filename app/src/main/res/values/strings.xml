@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MiwokApp</string>
+    <string name="NumberString">Numbers</string>
+    <string name="ColorString">Colors</string>
+    <string name="FamilyString">Family Members</string>
+    <string name="PhrasesString">Phrases</string>
+    <string name="AlphabetString">Phrases</string>
+</resources>

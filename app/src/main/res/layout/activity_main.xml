@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.android.miwokapp.MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red">
+
+        <TextView
+            style="@style/NumberStyle"
+            android:id="@+id/numbers"
+            android:text="@string/NumberString"
+            android:background="?android:attr/selectableItemBackground"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow">
+
+        <TextView
+            style="@style/AlphabetStyle"
+            android:id="@+id/alphabets"
+            android:text="@string/PhrasesString"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange">
+
+        <TextView
+            style="@style/FamilyStyle"
+            android:id="@+id/family"
+            android:text="@string/FamilyString"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green">
+        <TextView
+            style="@style/ColorStyle"
+            android:id="@+id/colors"
+            android:text="@string/ColorString"
+            android:background="?android:attr/selectableItemBackground"/>
+    </FrameLayout>
+</LinearLayout>

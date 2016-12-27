@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#FFF7DA">
+
+    <ImageView
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:id="@+id/icon"
+        tools:src="@drawable/number_one"
+        android:paddingRight="8dp"/>
+
+    <LinearLayout
+        android:id="@+id/parentView"
+        android:layout_width="0dp"
+        android:layout_height="88dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        tools:background="#E53935">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            tools:text="Where are you going" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            tools:text="minto wuksus" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/image_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:background="#E53935">
+
+        <ImageView
+            android:id="@+id/play_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_play_arrow_white_24dp"
+            tools:background="#E53935"/>
+
+    </LinearLayout>
+
+</LinearLayout>

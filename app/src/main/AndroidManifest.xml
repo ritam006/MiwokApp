@@ -17,16 +17,20 @@
         </activity>
         <activity
             android:name=".NumbersActivity"
-            android:label="@string/NumberString" />
+            android:parentActivityName=".MainActivity"
+            android:label="@string/NumberString"/>
 
         <activity
             android:name=".Phrases"
+            android:parentActivityName=".MainActivity"
             android:label="@string/AlphabetString" />
         <activity
             android:name=".FamilyActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/FamilyString" />
         <activity
             android:name=".ColorsActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/ColorString" />
     </application>
 

@@ -1,26 +1,30 @@
 package com.example.android.miwokapp;
 
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FamilyActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FamilyFragment extends Fragment {
 
     private MediaPlayer mp;
-    AudioManager am;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView=inflater.inflate(R.layout.activity_family,container,false);
         ArrayList<customString> familyMembers = new ArrayList<customString>();
         familyMembers.add(new customString("father", "apa", R.drawable.family_father, R.raw.family_father));
         familyMembers.add(new customString("mother", "ata", R.drawable.family_mother, R.raw.family_mother));
@@ -32,9 +36,9 @@ public class FamilyActivity extends AppCompatActivity {
         familyMembers.add(new customString("younger sister", "kolliti", R.drawable.family_younger_sister, R.raw.family_younger_sister));
         familyMembers.add(new customString("grandfather", "ama", R.drawable.family_grandfather, R.raw.family_grandfather));
         familyMembers.add(new customString("grandmother", "na'paapa", R.drawable.family_grandmother, R.raw.family_grandmother));
-        WordAdapter itemsAdapter = new WordAdapter(this, familyMembers);
+        WordAdapter itemsAdapter = new WordAdapter(getActivity(), familyMembers);
 
-        ListView listView = (ListView) findViewById(R.id.activity_family);
+        ListView listView = (ListView) rootView.findViewById(R.id.activity_family);
 
         listView.setAdapter(itemsAdapter);
 
@@ -43,13 +47,8 @@ public class FamilyActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 customString obj = (customString) adapterView.getItemAtPosition(i);
                 releaseMediaPlayer();
-                am=(AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                int result=am.requestAudioFocus(listener,AudioManager.STREAM_MUSIC,AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-                if(result==AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
-                    mp = MediaPlayer.create(FamilyActivity.this, obj.getAudioId());
-                    mp.start();
-
-                }
+                mp=MediaPlayer.create(getActivity(),obj.getAudioId());
+                mp.start();
                 mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
@@ -59,30 +58,8 @@ public class FamilyActivity extends AppCompatActivity {
 
             }
         });
-
+        return rootView;
     }
-
-    AudioManager.OnAudioFocusChangeListener listener = new AudioManager.OnAudioFocusChangeListener() {
-        @Override
-        public void onAudioFocusChange(int i) {
-            switch (i) {
-                case AudioManager.AUDIOFOCUS_LOSS:
-                    mp.pause();
-                    break;
-                case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT:
-                    mp.pause();
-                    break;
-                case AudioManager.AUDIOFOCUS_GAIN:
-                    mp.seekTo(0);
-                    mp.start();
-                    break;
-                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                    mp.pause();
-                    break;
-            }
-        }
-    };
-
     private void releaseMediaPlayer() {
         if (mp != null) {
             mp.release();
@@ -91,9 +68,8 @@ public class FamilyActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         releaseMediaPlayer();
     }
-
 }

@@ -1,25 +1,28 @@
 package com.example.android.miwokapp;
 
+
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class NumbersActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class NumbersFragment extends Fragment {
 
     MediaPlayer mp;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView=inflater.inflate(R.layout.activity_numbers,container,false);
         ArrayList<customString> numbers = new ArrayList<customString>();
         numbers.add(new customString("one", "lutti",R.drawable.number_one,R.raw.number_one));
         numbers.add(new customString("two", "otiiko",R.drawable.number_two,R.raw.number_two));
@@ -31,9 +34,9 @@ public class NumbersActivity extends AppCompatActivity {
         numbers.add(new customString("eight", "kawinta",R.drawable.number_eight,R.raw.number_eight));
         numbers.add(new customString("nine", "wo'e",R.drawable.number_nine,R.raw.number_nine));
         numbers.add(new customString("ten", "na'aacha",R.drawable.number_ten,R.raw.number_ten));
-        WordAdapter itemsAdapter=new WordAdapter(this,numbers);
+        WordAdapter itemsAdapter=new WordAdapter(getActivity(),numbers);
 
-        final ListView listView = (ListView) findViewById(R.id.activity_numbers);
+        final ListView listView = (ListView) rootView.findViewById(R.id.activity_numbers);
 
         listView.setAdapter(itemsAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -41,7 +44,7 @@ public class NumbersActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 customString obj=(customString) adapterView.getItemAtPosition(i);
                 releaseMediaPlayer();
-                mp=MediaPlayer.create(NumbersActivity.this,obj.getAudioId());
+                mp=MediaPlayer.create(getActivity(),obj.getAudioId());
                 mp.start();
 
                 mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -53,9 +56,8 @@ public class NumbersActivity extends AppCompatActivity {
 
             }
         });
-
+        return rootView;
     }
-
     private void releaseMediaPlayer(){
         if(mp!=null)
         {
@@ -65,12 +67,8 @@ public class NumbersActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         releaseMediaPlayer();
     }
-
 }
-
-
-

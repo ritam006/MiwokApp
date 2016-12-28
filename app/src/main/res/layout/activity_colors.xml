@@ -4,6 +4,6 @@
     android:id="@+id/activity_colors"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.miwokapp.ColorsActivity">
+    tools:context="com.example.android.miwokapp.ColorFragments">
 
 </ListView>

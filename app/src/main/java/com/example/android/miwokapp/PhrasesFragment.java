@@ -1,23 +1,28 @@
 package com.example.android.miwokapp;
 
+
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Phrases extends AppCompatActivity {
-
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class PhrasesFragment extends Fragment {
     private MediaPlayer mp;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phrase);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView=inflater.inflate(R.layout.activity_phrase,container,false);
         ArrayList<customString> phrases = new ArrayList<>();
         phrases.add(new customString("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
         phrases.add(new customString("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
@@ -29,8 +34,8 @@ public class Phrases extends AppCompatActivity {
         phrases.add(new customString("I’m coming", "әәnәm", R.raw.phrase_im_coming));
         phrases.add(new customString("Let’s go", "yoowutis", R.raw.phrase_lets_go));
         phrases.add(new customString("Come here. ", "әnni'nem", R.raw.phrase_come_here));
-        WordAdapter adapter = new WordAdapter(this, phrases);
-        ListView listView = (ListView) findViewById(R.id.activity_phrases);
+        WordAdapter adapter = new WordAdapter(getActivity(), phrases);
+        ListView listView = (ListView) rootView.findViewById(R.id.activity_phrases);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -39,7 +44,7 @@ public class Phrases extends AppCompatActivity {
                 customString obj = (customString) adapterView.getItemAtPosition(i);
 
                 releaseMediaPlayer();
-                mp = MediaPlayer.create(Phrases.this, obj.getAudioId());
+                mp = MediaPlayer.create(getActivity(), obj.getAudioId());
                 mp.start();
 
                 mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -51,9 +56,8 @@ public class Phrases extends AppCompatActivity {
 
             }
         });
-
+        return rootView;
     }
-
     private void releaseMediaPlayer(){
         if(mp!=null)
         {
@@ -63,8 +67,8 @@ public class Phrases extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         releaseMediaPlayer();
     }
 }

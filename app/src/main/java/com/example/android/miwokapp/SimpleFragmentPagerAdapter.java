@@ -13,6 +13,8 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    String title[]={"Numbers","Family","Colors","Phrases"};
+
     @Override
     public Fragment getItem(int position) {
 
@@ -30,5 +32,10 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 4;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return title[position];
     }
 }

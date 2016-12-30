@@ -1,6 +1,7 @@
 package com.example.android.miwokapp;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         SimpleFragmentPagerAdapter adapter=new SimpleFragmentPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(adapter);
+
+        TabLayout tab=(TabLayout)findViewById(R.id.tabLayout);
+        tab.setupWithViewPager(viewPager);
 
     }
 
